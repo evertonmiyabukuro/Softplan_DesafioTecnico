@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{91CD36EC-0089-4A5B-818D-9FD3C99DE5BE}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DesafioTecnicoSoftplan.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Tests\DesafioTecnicoSoftPlan_Testes.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DesafioTecnicoSoftplan">
+        <MSBuild Projects="DesafioTecnicoSoftplan.dproj"/>
+    </Target>
+    <Target Name="DesafioTecnicoSoftplan:Clean">
+        <MSBuild Projects="DesafioTecnicoSoftplan.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DesafioTecnicoSoftplan:Make">
+        <MSBuild Projects="DesafioTecnicoSoftplan.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DesafioTecnicoSoftPlan_Testes">
+        <MSBuild Projects="Tests\DesafioTecnicoSoftPlan_Testes.dproj"/>
+    </Target>
+    <Target Name="DesafioTecnicoSoftPlan_Testes:Clean">
+        <MSBuild Projects="Tests\DesafioTecnicoSoftPlan_Testes.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DesafioTecnicoSoftPlan_Testes:Make">
+        <MSBuild Projects="Tests\DesafioTecnicoSoftPlan_Testes.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DesafioTecnicoSoftplan;DesafioTecnicoSoftPlan_Testes"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DesafioTecnicoSoftplan:Clean;DesafioTecnicoSoftPlan_Testes:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DesafioTecnicoSoftplan:Make;DesafioTecnicoSoftPlan_Testes:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
