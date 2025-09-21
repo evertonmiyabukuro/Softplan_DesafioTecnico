@@ -79,3 +79,7 @@ Há algumas melhorias que são importantes para um produto final:
 - Melhor controle com relação às conexões ao banco de dados.
 - Observabilidade (logs e registros dos resultados das requisições feitas à API).
 - Requisições à APIs web ser feitas por TTasks/Threads, de forma a não travar a intterface da aplicação.
+O requisito relativo à validação de estado digitado para o usuário alterei a implementação para utilizar um combobox, pois dois motivos:
+- A API da ViaCEP requer a requisição usando a UF, então não faria sentido deixar o usuário digitar o nome completo do estado.
+- Limitar as opções as UFs válidas para o ViaCEP minimizam a possibilidade de erros por parte do usuário.
+- Porém num contexto de estar trabalhando numa squad, essa alteração seria alinhada ainda na etapa de análise com os analistas de negócio.
