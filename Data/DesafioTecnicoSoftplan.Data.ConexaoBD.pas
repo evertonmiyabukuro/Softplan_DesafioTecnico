@@ -27,7 +27,7 @@ type
       function executarSelect(const prSQL: String; const Params: Array of Variant): TDataSet;
 
       constructor Create;
-      destructor Destroy; reintroduce;
+      destructor Destroy; override;
    end;
 
 implementation

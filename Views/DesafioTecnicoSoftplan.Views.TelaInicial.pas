@@ -46,6 +46,7 @@ type
       procedure rgConsultaViaClick(Sender: TObject);
       procedure btConsultarCepsClick(Sender: TObject);
       procedure btExcluirRegistroSelecionadoClick(Sender: TObject);
+      procedure FormDestroy(Sender: TObject);
    private
       FConexaoBD: IConexaoBD;
       FDaoCep: IDAOCep;
@@ -58,6 +59,7 @@ type
       function getBuscadorViaCEPSelecionado: IBuscaViaCEP;
       procedure efetuarBuscaPorCep;
       procedure efetuarBuscaPorEndereco;
+      procedure liberarDatasetCeps();
    end;
 
 var
@@ -87,16 +89,8 @@ begin
 end;
 
 procedure TfrPrincipal.btConsultarCepsClick(Sender: TObject);
-var
-   wTmpDataSet: TDataSet;
 begin
-   if dsDadosCepsCadastrados.DataSet <> nil then
-      begin
-         wTmpDataSet := dsDadosCepsCadastrados.DataSet;
-         dsDadosCepsCadastrados.DataSet.Close;
-         dsDadosCepsCadastrados.DataSet := nil;
-         FreeAndNil(wTmpDataSet);
-      end;
+   liberarDatasetCeps();
 
    dsDadosCepsCadastrados.DataSet := FDaoCep.retornaConsultaCepsCadastrados;
 end;
@@ -154,11 +148,21 @@ begin
    FDaoCep := TDAOCep.Create(FConexaoBD);
    FTratadorEventosMensagens := TEventosMensagensUI.Create;
    FValidacoesTelaBuscaCEP := TValidacoesTelaBuscaCEP.Create(FTratadorEventosMensagens);
-
    FBuscaCepController := nil;
    FComponenteBuscaViaCEPAtual := nil;
-
    FBuscadorViaCEP := TBuscadorViaCEP.Create;
+end;
+
+procedure TfrPrincipal.FormDestroy(Sender: TObject);
+begin
+   FBuscadorViaCEP := nil;
+   FComponenteBuscaViaCEPAtual := nil;
+   FBuscaCepController := nil;
+   FValidacoesTelaBuscaCEP:= nil;
+   FTratadorEventosMensagens := nil;
+   FDaoCep := nil;
+   FConexaoBD := nil;
+   liberarDatasetCeps()
 end;
 
 procedure TfrPrincipal.FormShow(Sender: TObject);
@@ -177,6 +181,19 @@ begin
       end;
 
    result := FComponenteBuscaViaCEPAtual;
+end;
+
+procedure TfrPrincipal.liberarDatasetCeps;
+var
+   wTmpDataSet: TDataSet;
+begin
+   if dsDadosCepsCadastrados.DataSet <> nil then
+      begin
+         wTmpDataSet := dsDadosCepsCadastrados.DataSet;
+         dsDadosCepsCadastrados.DataSet.Close;
+         dsDadosCepsCadastrados.DataSet := nil;
+         FreeAndNil(wTmpDataSet);
+      end;
 end;
 
 procedure TfrPrincipal.rgConsultaViaClick(Sender: TObject);

@@ -62,6 +62,8 @@ var
   nunitLogger : ITestLogger;
 {$ENDIF}
 begin
+  ReportMemoryLeaksOnShutdown := True;
+
   TDUnitX.Options.ExitBehavior := TDUnitXExitBehavior.Pause;
 
   DeleteFile(IncludeTrailingPathDelimiter(ExtractFilePath(GetModuleName(0)))+'bd\BDCEP.db');

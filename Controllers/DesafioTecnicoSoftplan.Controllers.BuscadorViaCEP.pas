@@ -28,7 +28,7 @@ type
       const C_URL_BUSCAENDERECO_XML = TBuscadorViaCEP.C_BASE_URL_BUSCA_ENDERECO + 'xml/';
 
       constructor Create;
-      destructor Destroy; reintroduce;
+      destructor Destroy; override;
    end;
 
 implementation

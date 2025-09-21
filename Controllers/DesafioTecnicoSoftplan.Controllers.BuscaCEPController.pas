@@ -40,17 +40,20 @@ var
    wCep : ICep;
 begin
    wCeps := FComponenteBuscaViaCEP.buscaPorEndereco(prUF, prCidade, prEndereco);
+   try
+      if wCeps.IsEmpty then
+         begin
+            FEventosMensagens.exibirMensagem('O endereço informado não foi encontrado na base de dados da ViaCEP!');
+            exit;
+         end;
 
-   if wCeps.IsEmpty then
-      begin
-         FEventosMensagens.exibirMensagem('O endereço informado não foi encontrado na base de dados da ViaCEP!');
-         exit;
-      end;
+      for wCep in wCeps do
+         FDAOCep.armazenarCEP(wCep);
 
-   for wCep in wCeps do
-      FDAOCep.armazenarCEP(wCep);
-
-   FEventosMensagens.exibirMensagem('Endereço(s) buscado(s) e armazenado(s) com sucesso!');
+      FEventosMensagens.exibirMensagem('Endereço(s) buscado(s) e armazenado(s) com sucesso!');
+   finally
+       FreeAndNil(wCeps);
+   end;
 end;
 
 procedure TBuscaCepController.BuscaDoWS_E_Grava(prCEP: Integer);
