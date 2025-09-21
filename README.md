@@ -70,3 +70,12 @@ A aplicação possui duas abas principais (na parte inferior da interface):
 ### 2. Consultar CEPs cadastrados
 - Exibe os CEPs já importados para consulta.
 - Permite **excluir registros** do banco.
+
+---
+
+### Observações finais
+
+Há algumas melhorias que são importantes para um produto final:
+- Melhor controle com relação às conexões ao banco de dados.
+- Observabilidade (logs e registros dos resultados das requisições feitas à API).
+- Requisições à APIs web ser feitas por TTasks/Threads, de forma a não travar a intterface da aplicação.
