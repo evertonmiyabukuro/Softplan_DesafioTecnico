@@ -29,6 +29,7 @@ begin
 
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.Title := 'Busca e visualização de CEP';
   Application.CreateForm(TfrPrincipal, frPrincipal);
   Application.Run;
 end.

@@ -30,7 +30,7 @@ begin
    if Length(prCaptions) <> 2 then
       raise Exception.Create('TEventosMensagensUI.exibirMensagem_Pergunta_Ao_Usuario: Esse método espera apenas duas opções para os botões');
 
-   result := TaskMessageDlg(Application.MainForm.Caption, prMensagem, TMsgDlgType.mtConfirmation, mbYesNo, 0, mbYes, prCaptions);
+   result := TaskMessageDlg(Application.MainForm.Caption, prMensagem, TMsgDlgType.mtCustom, mbYesNo, 0, mbYes, prCaptions);
 end;
 
 end.
